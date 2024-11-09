@@ -12,28 +12,28 @@ interface TodoDAO {
 
     // All the Queries
     @Query("SELECT * FROM `todo-table` ORDER BY id ASC")
-    fun getAllTask() : Flow<List<TodoTasks>>
+    fun getAllTask() : Flow<List<TodoTask>>
 
     @Query("SELECT * FROM `todo-table` WHERE id=:todoId")
-    fun getSelectedTask(todoId: Int):List<TodoTasks>
+    fun getSelectedTask(todoId: Int):List<TodoTask>
 
     // Used suspended as there is no return type as Flow
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addTask(todoTasks: TodoTasks)
+    suspend fun addTask(todoTask: TodoTask)
 
     @Delete
-    suspend fun deleteTask(todoTasks: TodoTasks)
+    suspend fun deleteTask(todoTask: TodoTask)
 
     @Query("DELETE FROM `todo-table`")
     suspend fun deleteAllTask()
 
     @Query("SELECT * FROM `todo-table` WHERE title LIKE :searchQuery OR description LIKE :searchQuery")
-    fun searchDataBase(searchQuery: String) : Flow<List<TodoTasks>>
+    fun searchDataBase(searchQuery: String) : Flow<List<TodoTask>>
 
     @Query("SELECT * FROM `todo-table` ORDER BY CASE WHEN priority LIKE 'L%' THEN 1 WHEN priority LIKE 'M%' THEN 2 WHEN priority LIKE 'H%' THEN 3 END")
-    fun sortByLowPriority(): Flow<List<TodoTasks>>
+    fun sortByLowPriority(): Flow<List<TodoTask>>
 
     @Query("SELECT * FROM `todo-table` ORDER BY CASE WHEN priority LIKE 'H%' THEN 1 WHEN priority LIKE 'M%' THEN 2  WHEN priority LIKE 'L%' THEN 3 END")
-    fun sortByHighPriority(): Flow<List<TodoTasks>>
+    fun sortByHighPriority(): Flow<List<TodoTask>>
 }
 

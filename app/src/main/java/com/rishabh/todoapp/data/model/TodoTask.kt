@@ -6,7 +6,7 @@ import com.rishabh.todoapp.utils.TODO_TABLE
 // Entity to Describe the Todo table fields
 
 @Entity(tableName = TODO_TABLE)
-data class TodoTasks(
+data class TodoTask(
     @PrimaryKey(autoGenerate = true )
     val id:Int = 0,
     val title : String,
